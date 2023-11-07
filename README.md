@@ -34,14 +34,14 @@ Open URL \$CONSUL_HTTP_ADDR in browser
 
 
 ## 2. Using Consul CLI
-
-a\. Show Console servers:
 ```
+# Show Console servers
 > consul members -wan
 Node Address Status Type Build Protocol DC Partition Segment
 consul-server-0.dc1 10.0.1.98:8302 alive server 1.16.0 2 dc1 default \<all\>
 consul-server-0.dc2 10.244.1.45:8302 alive server 1.16.0 2 dc2 default \<all\>
 
+# Show registered services
 > consul catalog services
 consul
 ingress-gateway
@@ -53,7 +53,7 @@ mesh-gateway
 # Switch context
 > kubectx eks
 
-# show nodes the pods fall on
+# Show nodes the pods run on
 > k get nodes
 
 > k get pods -o wide | grep consul
