@@ -187,7 +187,7 @@ joining 2 or more Consul DCs.
 via Service Mesh
 \- Using UI you can view Mesh GWs and LAN federations connected to it
 
- **Annotations used for connectivity: **
+** Annotations used for connectivity: **
 ```
 consul.hashicorp.com/connect-inject-status: injected
 **\# connect backend upstream svc to localhost of frontend. Used in Multi-DC. Need to mention service and dc**
