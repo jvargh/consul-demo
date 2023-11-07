@@ -192,5 +192,5 @@ via Service Mesh
 consul.hashicorp.com/connect-inject-status: injected
 
 # connect backend upstream svc to localhost of frontend. Used in Multi-DC. Need to mention service and dc
-consul.hashicorp.com/connect-service-upstreams: counting:9001:**dc2**
+consul.hashicorp.com/connect-service-upstreams: counting:9001:dc2
 ```
