@@ -1,0 +1,10 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceResolver
+metadata:
+  name: counting
+spec:
+  connectTimeout: 5s
+  failover:
+    '*':
+      targets:
+      - datacenter: "dc2"
