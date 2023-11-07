@@ -181,10 +181,13 @@ Kubernetes](https://www.youtube.com/watch?v=acyxtR_3PXo&ab_channel=HashiCorp)
 
 \- Traffic cloud to cloud goes through a common data plane. So you can control what app to app traffic goes through, which services can talk to each other. In Consul this can be done through Intentions though to
 Layer 7.
+
 \- Consul across clouds is done through Federation. Federation is act of
 joining 2 or more Consul DCs.
+
 \- Federated clusters allow services in all DCs to talk to each other
 via Service Mesh
+
 \- Using UI you can view Mesh GWs and LAN federations connected to it
 
 ## Annotations used for connectivity: 
