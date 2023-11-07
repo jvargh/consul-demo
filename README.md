@@ -16,17 +16,14 @@ Using Terraforms cloud-agnostic capabilities, the following was setup as part of
 # Demo 1: Describe Consul setup
 
 ## 0. Install steps
-
-1.  cd **demo1-consulsetup**; terraform apply with content in
-    'proxy_defaults.tf' commented.
-
-2.  On completion, uncomment content and reapply terraform apply.
-
-3.  Use t init \--upgrade to clear old tf state and possibly delete the
-    tfstate file.
-
+```
+1.  cd demo1-consulsetup; Run "terraform apply --auto-approve" with content in 'proxy_defaults.tf' commented.
+2.  On completion, uncomment content in 'proxy_defaults.tf' and reapply "terraform apply --auto-approve".
+3.  Use "t init --upgrade" to clear old tf state and possibly delete the tfstate file.
 4.  Use alias k=kubectl (shell) or set-alias -Name k -Value kubectl (PS)
+5.  Use alias t=terraform (shell) or set-alias -Name t -Value terraform (PS)
 
+```
 ## 1. Showing Console-UI
 ```
 export CONSUL_HTTP_ADDR=https://$(kubectl get services/consul-ui -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
@@ -69,8 +66,10 @@ consul-webhook-cert-manager-656f4db796-sprhr 1/1 Running 10.0.1.209 ip-10-0-1-75
 # Demo 2: Install Front End and Back End Application
 
 ## 0. Install steps
-1.  cd **demo2-countingsvc**; terraform apply \--auto-approve
-2.  Install completes of FE and BE in **dc1** and install of FE and BE in **dc2**.
+```
+1.  cd demo2-countingsvc; Run "terraform apply --auto-approve"
+2.  Install completes of FrontEnd and BackEnd in dc1 and install of FrontEnd and BackEnd in dc2.
+```
 
 ## 1. Check EKS services
 ```
