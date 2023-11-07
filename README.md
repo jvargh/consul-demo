@@ -1,13 +1,10 @@
 # Demo 0: Multi-cloud Kubernetes
-
+```
 Using Terraforms cloud-agnostic capabilities, the following was setup as part of multi-cloud strategy:
-
 1.  Provisioning Kubernetes clusters in both AWS and Azure was done using their respective providers for AKS in Azure and EKS in AWS.
-
 2.  Consul deployed and Consul federation configured with Mesh gateways across 2 cloud clusters using the Helm providers
-
 3.  Microservices will then be deployed across 2 clusters and shown to function, thereby verifying federation.
-
+```
 ![image1](https://github.com/jvargh/consul-demo/assets/3197295/d2c278d6-435c-4eca-a1bf-ff0177624307)
 
 
