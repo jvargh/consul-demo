@@ -133,17 +133,21 @@ k get serviceresolver
 
 0\. Run kubectx eks
 
-1\. Use cmd to scaled down, effectively bringing Primary back-end down. 
+1\. Use cmd to scale down, effectively bringing Primary back-end down. 
 ```
 kubectl scale deployment.apps/counting --replicas=0
 ```
 When service Counting has replica=0 or no pods, then Dashboard in Primary will connect to Counting service in Secondary DC. Result=\> both UIs for Primary and Secondary should reflect same values
 
-2\. Use cmd to scaled up, effectively bringing Primary back-end up. 
+Fig shows result of scale down
+![image](https://github.com/jvargh/consul-demo/assets/3197295/30b98d87-6bf5-45ae-ad9a-ff015959ada9)
+
+2\. Use cmd to scale up, effectively bringing Primary back-end up. 
 ```
 kubectl scale deployment.apps/counting --replicas=1
 ```
 When service Counting has replica=1 or 1 pod, then Dashboard in Primary will start count from 1 and both UIs should show unique counts.
+
 
 # Demo 4: Intentions for services communication control
 
