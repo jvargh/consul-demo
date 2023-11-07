@@ -29,11 +29,8 @@ Using Terraforms cloud-agnostic capabilities, the following was setup as part of
 
 ## 1. Showing Console-UI
 ```
-export CONSUL_HTTP_ADDR=https://\$(kubectl get services/consul-ui -o
-jsonpath=\'{.status.loadBalancer.ingress\[0\].hostname}\')
-
+export CONSUL_HTTP_ADDR=https://\$(kubectl get services/consul-ui -o jsonpath=\'{.status.loadBalancer.ingress\[0\].hostname}\')
 export CONSUL_HTTP_SSL_VERIFY=false
-
 echo \$CONSUL_HTTP_ADDR
 ```
 Open URL \$CONSUL_HTTP_ADDR in browser
@@ -43,12 +40,12 @@ Open URL \$CONSUL_HTTP_ADDR in browser
 
 a\. Show Console servers:
 ```
-**consul members -wan**
+> consul members -wan
 Node Address Status Type Build Protocol DC Partition Segment
 consul-server-0.dc1 10.0.1.98:8302 alive server 1.16.0 2 dc1 default \<all\>
 consul-server-0.dc2 10.244.1.45:8302 alive server 1.16.0 2 dc2 default \<all\>
 
-**consul catalog services**
+> consul catalog services
 consul
 ingress-gateway
 mesh-gateway
@@ -56,13 +53,13 @@ mesh-gateway
 
 ## 3. Use Kubectl CLI 
 ```
-**\# Switch context**
-kubectx eks
+# Switch context
+> kubectx eks
 
-k get nodes
-**\# show nodes the pods fall on**
+# show nodes the pods fall on
+> k get nodes
 
-k get pods -o wide \| grep consul
+> k get pods -o wide | grep consul
 consul-connect-injector-556d9789cc-gxt2j 1/1 Running 10.0.1.51 ip-10-0-1-75.us-east-2.compute.internal
 consul-mesh-gateway-c77f4bfcb-5kqkm 1/1 Running 10.0.1.36 ip-10-0-1-75.us-east-2.compute.internal
 consul-server-0 1/1 Running 10.0.1.227 ip-10-0-1-75.us-east-2.compute.internal 
@@ -72,27 +69,25 @@ consul-webhook-cert-manager-656f4db796-sprhr 1/1 Running 10.0.1.209 ip-10-0-1-75
 # Demo 2: Install Front End and Back End Application
 
 ## 0. Install steps
-
 1.  cd **demo2-countingsvc**; terraform apply \--auto-approve
-
 2.  Install completes of FE and BE in **dc1** and install of FE and BE in **dc2**.
 
 ## 1. Check EKS services
 ```
 kubectx eks
 
-k get pods \> shows counting deployment pods and dashboard pods
+# shows counting deployment pods and dashboard pods
+k get pods 
 ```
 ![image2](https://github.com/jvargh/consul-demo/assets/3197295/ec484091-6c4a-498d-887d-017a7391d869)
 ```
-kubectl get pod counting-56b4497c7f-kfqsp =jsonpath=\'{.spec.containers\[\*\].name}\'
+> kubectl get pod counting-56b4497c7f-kfqsp =jsonpath=\'{.spec.containers\[\*\].name}\'
+counting consul-dataplane
 
-**counting consul-dataplane**
-
-**\# Logs on counting pod that show update of Consul servers**
+# Logs on counting pod that show update of Consul servers
 kubectl logs counting-56b4497c7f-kfqsp -c consul-dataplane \| grep consul
 
-**\# Shows registered services**
+# Shows registered services
 consul catalog services
 ```
 
@@ -100,7 +95,8 @@ consul catalog services
 ```
 kubectx aks
 
-k get pods \> shows counting deployment pods and dashboard pods
+# shows counting deployment pods and dashboard pods
+k get pods 
 ```
 ![image3](https://github.com/jvargh/consul-demo/assets/3197295/f9d47fda-0e21-4971-82dc-a926abdd61cc)
 
@@ -117,25 +113,20 @@ kubectl port-forward dashboard 81:9002 \--context aks
 ```
 
 ## 2. Bring down backend app in Primary Consul DC
-
-\# Scaled down counting backend pod to 0
-
+```
+# Scaled down counting backend pod to 0
 kubectl scale deployment.apps/counting \--replicas=0
-
+```
 Note how the FE Dashboard shows **-1**
 
 ## 3. Deploy Consul Service Resolver 
 ```
-**\# If old entry exists in Consul Datacenter (dc2) then delete**
-
+# If old entry exists in Consul Datacenter (dc2) then delete
 consul config delete -kind service-resolver -name counting -datacenter dc2
-
 consul config list -kind service-resolver
-
 cd demo2-countingsvc; kubectl apply -f service-resolver.yaml
 
-**\# Verify ServiceResolver sync and UP state**
-
+# Verify ServiceResolver sync and UP state
 k describe serviceresolver; k get serviceresolver
 ```
 
@@ -166,15 +157,15 @@ cd demo3; k apply -f .
 a.  Service Intention now ALLOWS static-client to communicate with static-server.
 ```
 > kubectl exec deploy/static-client -c static-client \-- curl -s <http://static-server>
-**\# returns "Hello World"**
+# returns "Hello World"
 ```
 
 b.  In Service Intention file change Allow to Deny. This disables static-client to communicate with static-server.
 ```
-## k apply -f client-to-server-intention.yaml
+> k apply -f client-to-server-intention.yaml
 
-> \$ kubectl exec deploy/static-client -c static-client \-- curl -s http://static-server
-> **command terminated with exit code 52**
+$ kubectl exec deploy/static-client -c static-client \-- curl -s http://static-server
+returns "command terminated with exit code 52"
 ```
 #  
 
