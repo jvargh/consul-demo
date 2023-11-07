@@ -29,9 +29,9 @@ Using Terraforms cloud-agnostic capabilities, the following was setup as part of
 
 ## 1. Showing Console-UI
 ```
-export CONSUL_HTTP_ADDR=https://\$(kubectl get services/consul-ui -o jsonpath=\'{.status.loadBalancer.ingress\[0\].hostname}\')
+export CONSUL_HTTP_ADDR=https://$(kubectl get services/consul-ui -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 export CONSUL_HTTP_SSL_VERIFY=false
-echo \$CONSUL_HTTP_ADDR
+echo $CONSUL_HTTP_ADDR 
 ```
 Open URL \$CONSUL_HTTP_ADDR in browser
 
@@ -105,17 +105,17 @@ k get pods
 
 ## 1. Connect to Dashboard App using UI
 ```
-kubectl port-forward dashboard 80:9002 \--context eks
+kubectl port-forward dashboard 80:9002 --context eks 
 <http://localhost:80/>
 
-kubectl port-forward dashboard 81:9002 \--context aks
+kubectl port-forward dashboard 81:9002 --context aks
 <http://localhost:81/>
 ```
 
 ## 2. Bring down backend app in Primary Consul DC
 ```
 # Scaled down counting backend pod to 0
-kubectl scale deployment.apps/counting \--replicas=0
+kubectl scale deployment.apps/counting --replicas=0
 ```
 Note how the FE Dashboard shows **-1**
 
@@ -124,26 +124,30 @@ Note how the FE Dashboard shows **-1**
 # If old entry exists in Consul Datacenter (dc2) then delete
 consul config delete -kind service-resolver -name counting -datacenter dc2
 consul config list -kind service-resolver
+
+# Apply config
 cd demo2-countingsvc; kubectl apply -f service-resolver.yaml
 
 # Verify ServiceResolver sync and UP state
-k describe serviceresolver; k get serviceresolver
+k describe serviceresolver
+k get serviceresolver
 ```
 
 ## 4. Test Consul Service Resolver functionality 
 
 0\. Run kubectx eks
 
-1\. For kubectl scale deployment.apps/counting \--replicas=0
+1\. Use cmd to scaled down, effectively bringing Primary back-end down. 
+```
+kubectl scale deployment.apps/counting --replicas=0
+```
+When service Counting has replica=0 or no pods, then Dashboard in Primary will connect to Counting service in Secondary DC. Result=\> both UIs for Primary and Secondary should reflect same values
 
-When service Counting has replica=0 or no pods, then Dashboard in
-Primary will connect to Counting service in Secondary DC. Result=\> both
-UIs for Primary and Secondary should reflect same values
-
-2\. For kubectl scale deployment.apps/counting \--replicas=1
-
-When service Counting has replica=1 or 1 pod, then Dashboard in Primary
-will start count from 1 and both UIs should show unique counts.
+2\. Use cmd to scaled up, effectively bringing Primary back-end up. 
+```
+kubectl scale deployment.apps/counting --replicas=1
+```
+When service Counting has replica=1 or 1 pod, then Dashboard in Primary will start count from 1 and both UIs should show unique counts.
 
 # Demo 4: Intentions for services communication control
 
@@ -156,7 +160,7 @@ cd demo3; k apply -f .
 
 a.  Service Intention now ALLOWS static-client to communicate with static-server.
 ```
-> kubectl exec deploy/static-client -c static-client \-- curl -s <http://static-server>
+> kubectl exec deploy/static-client -c static-client -- curl -s <http://static-server>
 # returns "Hello World"
 ```
 
@@ -164,7 +168,7 @@ b.  In Service Intention file change Allow to Deny. This disables static-client 
 ```
 > k apply -f client-to-server-intention.yaml
 
-$ kubectl exec deploy/static-client -c static-client \-- curl -s http://static-server
+$ kubectl exec deploy/static-client -c static-client -- curl -s http://static-server
 returns "command terminated with exit code 52"
 ```
 #  
