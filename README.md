@@ -122,6 +122,7 @@ consul catalog services
 kubectx aks
 
 k get pods \> shows counting deployment pods and dashboard pods
+
 ![image3](https://github.com/jvargh/consul-demo/assets/3197295/f9d47fda-0e21-4971-82dc-a926abdd61cc)
 
 
