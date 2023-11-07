@@ -101,6 +101,7 @@ ip-10-0-1-75.us-east-2.compute.internal
 kubectx eks
 
 k get pods \> shows counting deployment pods and dashboard pods
+
 ![image2](https://github.com/jvargh/consul-demo/assets/3197295/ec484091-6c4a-498d-887d-017a7391d869)
 
 kubectl get pod counting-56b4497c7f-kfqsp
