@@ -1,0 +1,26 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceIntentions
+metadata:
+  name: api-to-web-allow
+  namespace: lab2
+spec:
+  destination:
+    name: web
+  sources:
+    - name: api-v1
+      action: allow      
+# ---
+# apiVersion: consul.hashicorp.com/v1alpha1
+# kind: ServiceIntentions
+# metadata:
+#   name: web-to-api-allow
+#   namespace: lab2
+# spec:
+#   destination:
+#     name: api-v1
+#   sources:
+#     - name: web
+#       action: allow
+#     - action: deny
+#       http:
+#         pathPrefix: '/'      
