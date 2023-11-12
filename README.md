@@ -144,7 +144,7 @@ k get serviceresolver
 
 1\. Use cmd to scale down, effectively bringing Primary back-end down. 
 ```
-kubectl scale deployment.apps/counting --replicas=0  --context eks
+kubectl scale deployment.apps/counting --replicas=0 --context eks
 ```
 When service Counting has replica=0 or no pods, then Dashboard in Primary will connect to Counting service in Secondary DC. Result=\> both UIs for Primary and Secondary should reflect same values
 
@@ -154,7 +154,7 @@ Fig shows result of scale down
 
 2\. Use cmd to scale up, effectively bringing Primary back-end up. 
 ```
-kubectl scale deployment.apps/counting --replicas=1
+kubectl scale deployment.apps/counting --replicas=1 --context eks
 ```
 When service Counting has replica=1 or 1 pod, then Dashboard in Primary will start count from 1 and both UIs should show unique counts.
 
