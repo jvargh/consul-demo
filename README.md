@@ -173,8 +173,8 @@ a. Verify static server and client are up
 ```
 k get pods | grep static
 ```
+![image](https://github.com/jvargh/consul-demo/assets/3197295/2210280f-a122-490f-9ac1-9d2352dcd52a)
 
-![image](https://github.com/jvargh/consul-demo/assets/3197295/1a219a71-2ca4-4f79-be0f-4c4bdf02c090)
 
 b.  Service Intention now ALLOWS static-client to communicate with static-server.
 ```
