@@ -122,7 +122,7 @@ kubectl port-forward dashboard 81:9002 --context aks
 # Scaled down counting backend pod to 0 on EKS
 kubectl scale deployment.apps/counting --replicas=0 --context eks
 ```
-Note how the FE Dashboard shows **-1**
+Note how the FE Dashboard shows **-1** on EKS dashboard view in browser
 
 ## 3. Deploy Consul Service Resolver 
 ```
@@ -144,7 +144,7 @@ k get serviceresolver
 
 1\. Use cmd to scale down, effectively bringing Primary back-end down. 
 ```
-kubectl scale deployment.apps/counting --replicas=0
+kubectl scale deployment.apps/counting --replicas=0  --context eks
 ```
 When service Counting has replica=0 or no pods, then Dashboard in Primary will connect to Counting service in Secondary DC. Result=\> both UIs for Primary and Secondary should reflect same values
 
