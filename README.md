@@ -28,7 +28,7 @@ Using Terraforms cloud-agnostic capabilities, the following was setup as part of
 2.  On completion, uncomment content in 'proxy_defaults.tf' and reapply "terraform apply --auto-approve".
 3.  Use "t init --upgrade" to clear old tf state and possibly delete the tfstate file.
 ```
-## 1. Showing Console-UI
+## 1. View Console-UI in browser
 ```
 # cmd below uses hostname. change to ip if using hostname returns null response
 kubectx eks # since EKS is Primary Consul DC (dc1)
@@ -50,7 +50,6 @@ consul-server-0.dc2 10.244.1.45:8302 alive server 1.16.0 2 dc2 default \<all\>
 # Show registered services
 > consul catalog services
 consul
-ingress-gateway
 mesh-gateway
 ```
 
@@ -63,10 +62,10 @@ mesh-gateway
 > k get nodes
 
 > k get pods -o wide | grep consul
-consul-connect-injector-556d9789cc-gxt2j 1/1 Running 10.0.1.51 ip-10-0-1-75.us-east-2.compute.internal
-consul-mesh-gateway-c77f4bfcb-5kqkm 1/1 Running 10.0.1.36 ip-10-0-1-75.us-east-2.compute.internal
-consul-server-0 1/1 Running 10.0.1.227 ip-10-0-1-75.us-east-2.compute.internal 
-consul-webhook-cert-manager-656f4db796-sprhr 1/1 Running 10.0.1.209 ip-10-0-1-75.us-east-2.compute.internal
+consul-connect-injector-556d9789cc-gxt2j 1/1 Running 10.0.1.51 ip-10-xxx.us-east-2.compute.internal
+consul-mesh-gateway-c77f4bfcb-5kqkm 1/1 Running 10.0.1.36 ip-10-xxx.us-east-2.compute.internal
+consul-server-0 1/1 Running 10.0.1.227 ip-10-xxx.us-east-2.compute.internal 
+consul-webhook-cert-manager-656f4db796-sprhr 1/1 Running 10.0.1.209 ip-10-xxx.us-east-2.compute.internal
 ```
 
 # Demo 2: Install Front End and Back End Application
