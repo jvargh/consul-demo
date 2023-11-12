@@ -119,8 +119,8 @@ kubectl port-forward dashboard 81:9002 --context aks
 
 ## 2. Bring down backend app in Primary Consul DC
 ```
-# Scaled down counting backend pod to 0
-kubectl scale deployment.apps/counting --replicas=0
+# Scaled down counting backend pod to 0 on EKS
+kubectl scale deployment.apps/counting --replicas=0 --context eks
 ```
 Note how the FE Dashboard shows **-1**
 
