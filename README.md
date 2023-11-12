@@ -81,7 +81,8 @@ consul-webhook-cert-manager-656f4db796-sprhr 1/1 Running 10.0.1.209 ip-10-xxx.us
 kubectx eks
 
 # shows counting deployment pods and dashboard pods
-k get pods 
+k get pods # notice 2/2 indicating Consul Proxy sidecar container in addition to Application container
+k get pod/dashboard -o yaml | grep -n -A 3 connect-inject-status # status=injected due to Consul dc config with connectInject enabled=true 
 ```
 ![image2](https://github.com/jvargh/consul-demo/assets/3197295/ec484091-6c4a-498d-887d-017a7391d869)
 ```
