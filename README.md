@@ -4,19 +4,6 @@ Using Terraforms cloud-agnostic capabilities, the following was setup as part of
 1.  Provisioning Kubernetes clusters in both AWS and Azure was done using their respective providers for AKS in Azure and EKS in AWS.
 2.  Consul deployed and Consul federation configured with Mesh gateways across 2 cloud clusters using the Helm providers
 3.  Microservices will then be deployed across 2 clusters and shown to function, thereby verifying federation.
-```
-![image1](https://github.com/jvargh/consul-demo/assets/3197295/d2c278d6-435c-4eca-a1bf-ff0177624307)
-
-
-#  
-
-# Demo 1: Describe Consul setup
-
-## 0. Install steps
-```
-1.  cd demo1-consulsetup; Run "terraform apply --auto-approve" with content in 'proxy_defaults.tf' commented.
-2.  On completion, uncomment content in 'proxy_defaults.tf' and reapply "terraform apply --auto-approve".
-3.  Use "t init --upgrade" to clear old tf state and possibly delete the tfstate file.
 4.  Use alias k=kubectl (shell) or set-alias -Name k -Value kubectl (PS)
 5.  Use alias t=terraform (shell) or set-alias -Name t -Value terraform (PS)
 6.  Install kubectx and setup EKS and AKS profiles as below:
@@ -27,6 +14,19 @@ Using Terraforms cloud-agnostic capabilities, the following was setup as part of
     > az aks get-credentials --resource-group <AKS Resource Group> --name <AKS Cluster Name>
     > kubectx aks=<AKS Cluster Name>
     > kubectl cluster-info
+```
+![image1](https://github.com/jvargh/consul-demo/assets/3197295/d2c278d6-435c-4eca-a1bf-ff0177624307)
+
+
+#  
+
+# Demo 1: Consul setup
+
+## 0. Install steps
+```
+1.  cd demo1-consulsetup; Run "terraform apply --auto-approve" with content in 'proxy_defaults.tf' commented.
+2.  On completion, uncomment content in 'proxy_defaults.tf' and reapply "terraform apply --auto-approve".
+3.  Use "t init --upgrade" to clear old tf state and possibly delete the tfstate file.
 ```
 ## 1. Showing Console-UI
 ```
