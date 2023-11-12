@@ -169,14 +169,16 @@ cd demo3; k apply -f .
 ```
 
 ## 1. Test Intentions
+a. k get pods | grep static
+![image](https://github.com/jvargh/consul-demo/assets/3197295/1a219a71-2ca4-4f79-be0f-4c4bdf02c090)
 
-a.  Service Intention now ALLOWS static-client to communicate with static-server.
+b.  Service Intention now ALLOWS static-client to communicate with static-server.
 ```
 > kubectl exec deploy/static-client -c static-client -- curl -s <http://static-server>
 # returns "Hello World"
 ```
 
-b.  In Service Intention file change Allow to Deny. This disables static-client to communicate with static-server.
+c.  In Service Intention file change Allow to Deny. This disables static-client to communicate with static-server.
 ```
 > k apply -f client-to-server-intention.yaml
 
