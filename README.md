@@ -85,11 +85,11 @@ k get pods
 ```
 ![image2](https://github.com/jvargh/consul-demo/assets/3197295/ec484091-6c4a-498d-887d-017a7391d869)
 ```
-> kubectl get pod counting-56b4497c7f-kfqsp =jsonpath=\'{.spec.containers\[\*\].name}\'
+> kubectl get pod <counting pod name> -o=jsonpath='{.spec.containers[*].name}'
 counting consul-dataplane
 
 # Logs on counting pod that show update of Consul servers
-kubectl logs counting-56b4497c7f-kfqsp -c consul-dataplane \| grep consul
+kubectl logs <counting pod name> -c consul-dataplane | grep consul
 
 # Shows registered services
 consul catalog services
