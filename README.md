@@ -19,6 +19,14 @@ Using Terraforms cloud-agnostic capabilities, the following was setup as part of
 3.  Use "t init --upgrade" to clear old tf state and possibly delete the tfstate file.
 4.  Use alias k=kubectl (shell) or set-alias -Name k -Value kubectl (PS)
 5.  Use alias t=terraform (shell) or set-alias -Name t -Value terraform (PS)
+6.  Install kubectx and setup EKS and AKS profiles as shown
+      aws eks update-kubeconfig --region us-east-2 --name <EKS cluster>
+      kubectx eks=<EKS ARN>
+      kubectl cluster-info # to verify
+
+      az aks get-credentials --resource-group <AKS Resource Group> --name <AKS Cluster Name>
+      kubectx aks=<AKS Cluster Name>
+      kubectl cluster-info
 
 ```
 ## 1. Showing Console-UI
