@@ -175,11 +175,6 @@ k get pods | grep static
 ```
 ![image](https://github.com/jvargh/consul-demo/assets/3197295/2210280f-a122-490f-9ac1-9d2352dcd52a)
 
-## 2. Delete on completion
-```
-k delete -f  .
-```
-
 
 b.  Service Intention now ALLOWS static-client to communicate with static-server.
 ```
@@ -194,6 +189,12 @@ c.  In Service Intention file change Allow to Deny. This disables static-client 
 $ kubectl exec deploy/static-client -c static-client -- curl -s http://static-server
 returns "command terminated with exit code 52"
 ```
+
+## 2. Delete on completion
+```
+k delete -f  .
+```
+
 #  
 
 # References
