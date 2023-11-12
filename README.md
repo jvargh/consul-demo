@@ -68,6 +68,11 @@ consul-server-0 1/1 Running 10.0.1.227 ip-10-xxx.us-east-2.compute.internal
 consul-webhook-cert-manager-656f4db796-sprhr 1/1 Running 10.0.1.209 ip-10-xxx.us-east-2.compute.internal
 ```
 
+## 4. Delete on completion
+```
+t destroy --auto-approve
+```
+
 # Demo 2: Install Front End and Back End Application
 
 ## 0. Install steps
