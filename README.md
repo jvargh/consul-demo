@@ -31,6 +31,7 @@ Using Terraforms cloud-agnostic capabilities, the following was setup as part of
 ## 1. Showing Console-UI
 ```
 # cmd below uses hostname. change to ip if using hostname returns null response
+kubectx eks # since EKS is Primary Consul DC (dc1)
 export CONSUL_HTTP_ADDR=https://$(kubectl get services/consul-ui -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 export CONSUL_HTTP_SSL_VERIFY=false
 echo $CONSUL_HTTP_ADDR 
