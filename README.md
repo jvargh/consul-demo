@@ -161,6 +161,11 @@ kubectl scale deployment.apps/counting --replicas=1 --context eks
 When service Counting is up (has at least 1 pod), dc1 Dashboard will start count from 1. Both UIs should show unique counts.
 
 
+## 5. Delete on completion
+```
+t destroy --auto-approve
+```
+
 # Demo 4: Intentions for services communication control
 
 ## 0. Install steps
