@@ -111,7 +111,7 @@ k get pods
 ![image3](https://github.com/jvargh/consul-demo/assets/3197295/f9d47fda-0e21-4971-82dc-a926abdd61cc)
 
 
-# Demo 3: Failover 
+# Demo 2: Failover 
 
 ## 1. Connect to Dashboard App using UI
 ```
@@ -177,7 +177,7 @@ When service Counting is up (has at least 1 pod), dc1 Dashboard will start count
 t destroy --auto-approve
 ```
 
-# Demo 4: Intentions for services communication control
+# Demo 3: Intentions for services communication control
 
 ## 0. Install steps
 ```
