@@ -199,7 +199,7 @@ k get pods | grep static
 
 b.  Service Intention now ALLOWS static-client to communicate with static-server.
 ```
-> kubectl exec deploy/static-client -c static-client -- curl -s <http://static-server>
+> kubectl exec deploy/static-client -c static-client -- curl -s http://static-server
 # returns "Hello World"
 ```
 
