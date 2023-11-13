@@ -2,6 +2,7 @@
 ```
 Using Terraforms cloud-agnostic capabilities, the following was setup as part of multi-cloud strategy:
 1. Provisioning Kubernetes clusters in both AWS and Azure was done using their respective providers for AKS in Azure and EKS in AWS.
+   > Comment aws_eks_addon in main.tf till EKS build is complete and then uncomment and rerun 't apply'
 2. Consul deployed and Consul federation configured with Mesh gateways across 2 cloud clusters using the Helm providers
 3. Microservices will then be deployed across 2 clusters and shown to function, thereby verifying federation.
 4. Use alias k=kubectl (shell) or set-alias -Name k -Value kubectl (PS)
