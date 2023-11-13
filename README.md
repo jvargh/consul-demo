@@ -23,13 +23,18 @@ Using Terraforms cloud-agnostic capabilities, the following was setup as part of
 
 # Demo 1: Consul setup
 
-## 0. Install steps
+## 1. Base Install steps
 ```
-1. cd demo1-consulsetup; Run "terraform apply --auto-approve" with content in 'proxy_defaults.tf' commented.
-2. On completion, uncomment content in 'proxy_defaults.tf' and reapply "terraform apply --auto-approve".
-3. Use "t init --upgrade" to clear old tf state and possibly delete the tfstate file.
+1. Use "t init --upgrade" to clear old tf state and possibly delete the tfstate file.
+2. cd demo1-consulsetup; Run "terraform apply --auto-approve" with content in 'proxy_defaults.tf' commented.
 ```
-## 1. View Console-UI in browser
+
+## 2. Proxy Install steps
+```
+1. Uncomment content in 'proxy_defaults.tf' and run "terraform apply --auto-approve".
+```
+
+## 3. View Console-UI in browser
 ```
 # cmd below uses hostname. change to ip if using hostname returns null response
 kubectx eks # since EKS is Primary Consul DC (dc1)
@@ -40,7 +45,7 @@ echo $CONSUL_HTTP_ADDR
 Open URL \$CONSUL_HTTP_ADDR in browser
 
 
-## 2. Using Consul CLI
+## 4. Using Consul CLI
 ```
 # Show Console servers
 > consul members -wan
@@ -54,7 +59,7 @@ consul
 mesh-gateway
 ```
 
-## 3. Use Kubectl CLI 
+## 5. Use Kubectl CLI 
 ```
 # Switch context
 > kubectx eks
@@ -69,7 +74,7 @@ consul-server-0 1/1 Running 10.0.1.227 ip-10-xxx.us-east-2.compute.internal
 consul-webhook-cert-manager-656f4db796-sprhr 1/1 Running 10.0.1.209 ip-10-xxx.us-east-2.compute.internal
 ```
 
-## 4. Delete on completion
+## 6. Delete on completion
 ```
 t destroy --auto-approve
 ```
