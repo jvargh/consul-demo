@@ -111,10 +111,7 @@ k get pods
 ```
 ![image3](https://github.com/jvargh/consul-demo/assets/3197295/f9d47fda-0e21-4971-82dc-a926abdd61cc)
 
-
-# Demo 2: Failover 
-
-## 1. Connect to Dashboard App using UI
+## 3. Connect to Dashboard App using UI
 ```
 # Verify container port for Dashboard pod
 k get pod/dashboard -o yaml | grep -n -A 3 containerPort
@@ -126,7 +123,9 @@ kubectl port-forward dashboard 81:9002 --context aks
 <http://localhost:81/>
 ```
 
-## 2. Bring down backend app in Primary Consul DC
+# Demo 2: Failover 
+
+## 1. Bring down backend app in Primary Consul DC
 ```
 # Scaled down counting backend pod to 0 on EKS
 kubectl scale deployment.apps/counting --replicas=0 --context eks
@@ -136,7 +135,7 @@ k get pods --context eks
 ```
 Note how the FE Dashboard shows **-1** on EKS dashboard view in browser
 
-## 3. Deploy Consul Service Resolver 
+## 2. Deploy Consul Service Resolver 
 ```
 # If old entry exists in Consul Datacenter (dc2) then delete
 consul config delete -kind service-resolver -name counting -datacenter dc2
@@ -150,7 +149,7 @@ k describe serviceresolver
 k get serviceresolver
 ```
 
-## 4. Test Consul Service Resolver functionality 
+## 3. Test Consul Service Resolver functionality 
 
 0\. Run kubectx eks
 
@@ -173,7 +172,7 @@ kubectl scale deployment.apps/counting --replicas=1 --context eks
 When service Counting is up (has at least 1 pod), dc1 Dashboard will start count from 1. Both UIs should show unique counts.
 
 
-## 5. Delete on completion
+## 4. Delete on completion
 ```
 t destroy --auto-approve
 ```
