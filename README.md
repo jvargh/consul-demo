@@ -93,7 +93,10 @@ kubectx eks
 
 # shows counting deployment pods and dashboard pods
 k get pods # notice 2/2 indicating Consul Proxy sidecar container in addition to Application container
-k get pod/dashboard -o yaml | grep -n -A 3 connect-inject-status # status=injected due to Consul dc config with connectInject enabled=true 
+k get pod/dashboard -o yaml | grep -n -A 3 connect-inject-status # status=injected due to Consul dc config with connectInject enabled=true
+
+# check consul connectivity
+consul connect proxy -service dashboard -upstream counting:9001
 ```
 ![image2](https://github.com/jvargh/consul-demo/assets/3197295/ec484091-6c4a-498d-887d-017a7391d869)
 ```
@@ -112,7 +115,7 @@ consul catalog services
 kubectx aks
 
 # shows counting deployment pods and dashboard pods
-k get pods 
+k get pods --context aks
 ```
 ![image3](https://github.com/jvargh/consul-demo/assets/3197295/f9d47fda-0e21-4971-82dc-a926abdd61cc)
 
