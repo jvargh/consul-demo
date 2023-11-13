@@ -115,6 +115,9 @@ k get pods
 
 ## 1. Connect to Dashboard App using UI
 ```
+# Verify container port for Dashboard pod
+k get pod/dashboard -o yaml | grep -n -A 3 containerPort
+
 kubectl port-forward dashboard 80:9002 --context eks 
 <http://localhost:80/>
 
